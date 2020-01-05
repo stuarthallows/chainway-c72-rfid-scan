@@ -8,7 +8,6 @@ namespace C72Scan
 {
     public partial class App : Application
     {
-
         public App()
         {
             InitializeComponent();

@@ -23,4 +23,10 @@
       <HintPath>DLL\DeviceAPI.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ScanPage.xaml.cs">
+      <DependentUpon>ScanPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
