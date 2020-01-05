@@ -17,17 +17,32 @@ namespace C72Scan.Droid.Services
 
         public bool StopInventory()
         {
+            //return true;
             return uhfAPI.StopInventory();
         }
 
         public bool Init()
         {
+        //    return true;
             return uhfAPI.Init();
         }
 
         public bool Free()
         {
+      //      return true;
             return uhfAPI.Free();
+        }
+
+        public string InventorySingleTag()
+        {
+    //        return string.Empty;
+            return uhfAPI.InventorySingleTag();
+        }
+
+        public string ConvertUiiToEpc(string uii)
+        {
+  //          return string.Empty;
+            return uhfAPI.ConvertUiiToEPC(uii);
         }
     }
 }

@@ -11,5 +11,9 @@ namespace C72Scan.Services
         bool Init();
 
         bool Free();
+
+        string InventorySingleTag();
+
+        string ConvertUiiToEpc(string uii);
     }
 }

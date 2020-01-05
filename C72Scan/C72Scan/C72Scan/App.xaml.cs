@@ -34,7 +34,9 @@ namespace C72Scan
                 if (i != 3)
                 {
                     if (!rfidService.Init())
+                    {
                         rfidService.Free();
+                    }
                 }
                 else
                 {
