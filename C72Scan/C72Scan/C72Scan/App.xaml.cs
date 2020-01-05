@@ -20,16 +20,24 @@ namespace C72Scan
         protected override void OnStart()
         {
             rfidService.StopInventory();
+
+            InitializeReader();
         }
 
         protected override void OnSleep()
         {
-            rfidService.Free();
+            rfidService.StopInventory();
         }
 
         protected override void OnResume()
         {
-            for (int i = 1; i <= 3; i++)
+            InitializeReader();
+        }
+
+        // TODO Handle initialization failure
+        private void InitializeReader()
+        {
+            for (var i = 1; i <= 3; i++)
             {
                 if (i != 3)
                 {

@@ -15,14 +15,18 @@ namespace C72Scan.ViewModels
 
             Title = "Scan";
 
-            Tag = "E8011700454FGHT66457GH60";
-            ScannedAt = DateTime.Now;
-
             ScanCommand = new Command(Scan);
+
+            MessagingCenter.Subscribe<string, string>(this, "Scan", (sender, arg) =>
+            {
+                Scan();
+            });
         }
 
         private void Scan()
         {
+            SetTag(null);
+            
             var uii = rfidService.InventorySingleTag();
 
             if (string.IsNullOrEmpty(uii))
@@ -30,15 +34,7 @@ namespace C72Scan.ViewModels
                 return;
             }
 
-            Tag = rfidService.ConvertUiiToEpc(uii);
-            ScannedAt = DateTime.Now;
-        }
-
-        private string scanButtonText = string.Empty;
-        public string ScanButtonText
-        {
-            get => scanButtonText;
-            set => SetProperty(ref scanButtonText, value);
+            SetTag(rfidService.ConvertUiiToEpc(uii));
         }
 
         private string tag = string.Empty;
@@ -56,5 +52,11 @@ namespace C72Scan.ViewModels
         }
 
         public ICommand ScanCommand { get; }
+
+        private void SetTag(string tagId)
+        {
+            Tag = tagId;
+            ScannedAt = DateTime.Now;
+        }
     }
 }

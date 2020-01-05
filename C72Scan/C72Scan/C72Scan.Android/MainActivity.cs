@@ -1,11 +1,9 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Xamarin.Forms;
 
 namespace C72Scan.Droid
 {
@@ -30,6 +28,20 @@ namespace C72Scan.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        public override bool OnKeyUp(Keycode keyCode, KeyEvent e)
+        {
+            if (e.KeyCode.GetHashCode() == 139 || e.KeyCode.GetHashCode() == 280 || e.KeyCode.GetHashCode() == 293)
+            {
+                if (e.RepeatCount == 0)
+                {
+                    // TODO Normally the sender type would be set, but MainActivity is not accessible in the shared project. Consider using custom type.
+                    MessagingCenter.Send(string.Empty, "Scan", "");
+                }
+            }
+
+            return base.OnKeyDown(keyCode, e);
         }
     }
 }

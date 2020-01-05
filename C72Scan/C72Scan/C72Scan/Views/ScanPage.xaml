@@ -70,10 +70,6 @@
                     <Label Text="Transfer" FontSize="22"></Label>
                     <Switch></Switch>
                 </StackLayout>
-                <Button Margin="0,10,0,0" Text="{Binding ScanButtonText}"
-                        Command="{Binding ScanCommand}"
-                        BackgroundColor="{StaticResource Primary}"
-                        TextColor="White" />
             </StackLayout>
         </ScrollView>
     </Grid>
