@@ -34,8 +34,8 @@
         <Tab Title="Scan" Icon="tab_feed.png">
             <ShellContent ContentTemplate="{DataTemplate local:ScanPage}" />
         </Tab>
-        <Tab Title="About" Icon="tab_about.png">
-            <ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />
+        <Tab Title="Devices" Icon="tab_about.png">
+            <ShellContent ContentTemplate="{DataTemplate local:DevicesPage}" />
         </Tab>
     </TabBar>
 
