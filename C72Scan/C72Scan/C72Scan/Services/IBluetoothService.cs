@@ -5,6 +5,6 @@ namespace C72Scan.Services
 {
     public interface IBluetoothService
     {
-        IEnumerable<BluetoothDevice> GetDevices();
+        IEnumerable<BondedDevice> GetBondedDevices();
     }
 }

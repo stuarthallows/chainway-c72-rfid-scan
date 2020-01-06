@@ -12,13 +12,13 @@ namespace C72Scan.ViewModels
     public class DevicesViewModel : BaseViewModel
     {
         private IBluetoothService bluetoothService;
-        public ObservableCollection<BluetoothDevice> Devices { get; set; }
+        public ObservableCollection<BondedDevice> Devices { get; set; }
         public Command LoadDevicesCommand { get; set; }
 
         public DevicesViewModel()
         {
             Title = "Devices";
-            Devices = new ObservableCollection<BluetoothDevice>();
+            Devices = new ObservableCollection<BondedDevice>();
             LoadDevicesCommand = new Command(ExecuteLoadDevicesCommand);
 
             bluetoothService = DependencyService.Get<IBluetoothService>();
@@ -37,7 +37,7 @@ namespace C72Scan.ViewModels
             {
                 Devices.Clear();
 
-                var devices = bluetoothService.GetDevices();
+                var devices = bluetoothService.GetBondedDevices();
 
                 foreach (var item in devices)
                 {
