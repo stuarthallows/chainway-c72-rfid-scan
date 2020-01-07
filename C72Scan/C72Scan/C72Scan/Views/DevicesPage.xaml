@@ -8,9 +8,15 @@
              Title="{Binding Title}"
              x:Name="BrowseDevicesPage">
 
-    <ContentPage.ToolbarItems>
-        <!--<ToolbarItem Text="Add" Clicked="AddItem_Clicked" />-->
-    </ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
+        --><!--<ToolbarItem Text="Add" Clicked="AddItem_Clicked" />--><!--
+    </ContentPage.ToolbarItems>-->
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#2196F3</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <StackLayout>
         <ListView x:Name="DevicesListView"
@@ -20,7 +26,8 @@
                 RefreshCommand="{Binding LoadDevicesCommand}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                CachingStrategy="RecycleElement">
+                CachingStrategy="RecycleElement"
+                ItemSelected="OnDeviceSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -38,6 +45,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Margin="0,10,0,0" Text="Connect"
+                Command="{Binding ConnectCommand}"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White" />
     </StackLayout>
 
 </ContentPage>

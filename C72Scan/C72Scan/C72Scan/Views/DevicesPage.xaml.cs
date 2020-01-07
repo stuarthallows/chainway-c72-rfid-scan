@@ -27,19 +27,16 @@ namespace C72Scan.Views
             BindingContext = viewModel = new DevicesViewModel();
         }
 
-        //async void OnDeviceSelected(object sender, SelectedDeviceChangedEventArgs args)
-        //{
-        //    var device = args.SelectedDevice as BluetoothDevice;
-        //    if (device == null)
-        //    {
-        //        return;
-        //    }
+        void OnDeviceSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var device = args.SelectedItem as BondedDevice;
+            if (device == null)
+            {
+                return;
+            }
 
-        //    await Navigation.PushAsync(new DeviceDetailPage(new DeviceDetailViewModel(Device)));
-
-        //    // Manually deselect Device.
-        //    DevicesListView.SelectedDevice = null;
-        //}
+            viewModel.SelectedDevice = device;
+        }
 
         protected override void OnAppearing()
         {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 using Xamarin.Forms;
 
@@ -11,17 +10,33 @@ namespace C72Scan.ViewModels
 {
     public class DevicesViewModel : BaseViewModel
     {
-        private IBluetoothService bluetoothService;
+        private readonly IBluetoothService bluetoothService;
+        private readonly IMessage messageService;
+
         public ObservableCollection<BondedDevice> Devices { get; set; }
         public Command LoadDevicesCommand { get; set; }
+        public Command ConnectCommand { get; set; }
+
+        private BondedDevice selectedDevice;
+        public BondedDevice SelectedDevice
+        {
+            get => selectedDevice;
+            set
+            {
+                selectedDevice = value;
+                ConnectCommand.ChangeCanExecute();
+            }
+        }
 
         public DevicesViewModel()
         {
             Title = "Devices";
             Devices = new ObservableCollection<BondedDevice>();
             LoadDevicesCommand = new Command(ExecuteLoadDevicesCommand);
+            ConnectCommand = new Command(ExecuteConnectToDeviceCommand, () => SelectedDevice != null);
 
             bluetoothService = DependencyService.Get<IBluetoothService>();
+            messageService = DependencyService.Get<IMessage>();
         }
 
         private void ExecuteLoadDevicesCommand()
@@ -46,11 +61,25 @@ namespace C72Scan.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                messageService.LongAlert(ex.Message);
             }
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        private void ExecuteConnectToDeviceCommand()
+        {
+            try
+            {
+                bluetoothService.Connect(SelectedDevice);
+
+                messageService.LongAlert("Connected 👍🏼");
+            }
+            catch (Exception e)
+            {
+                messageService.LongAlert(e.Message);
             }
         }
     }
