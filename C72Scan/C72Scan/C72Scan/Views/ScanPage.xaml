@@ -66,9 +66,9 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <StackLayout Orientation="Horizontal" >
-                    <Label Text="Transfer" FontSize="22"></Label>
-                    <Switch></Switch>
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Label Text="Transfer"></Label>
+                    <Switch IsToggled="{Binding IsTransferToggled}"></Switch>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

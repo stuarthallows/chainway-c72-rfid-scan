@@ -32,13 +32,12 @@ namespace C72Scan.Droid
 
         public override bool OnKeyUp(Keycode keyCode, KeyEvent e)
         {
-            if (e.KeyCode.GetHashCode() == 139 || e.KeyCode.GetHashCode() == 280 || e.KeyCode.GetHashCode() == 293)
+            var triggerPulled = e.KeyCode.GetHashCode() == 139 || e.KeyCode.GetHashCode() == 280 || e.KeyCode.GetHashCode() == 293;
+
+            if (triggerPulled && e.RepeatCount == 0)
             {
-                if (e.RepeatCount == 0)
-                {
-                    // TODO Normally the sender type would be set, but MainActivity is not accessible in the shared project. Consider using custom type.
-                    MessagingCenter.Send(string.Empty, "Scan", "");
-                }
+                // TODO Normally the sender type would be set, but MainActivity is not accessible in the shared project. Consider using custom type.
+                MessagingCenter.Send(string.Empty, "Scan", string.Empty);
             }
 
             return base.OnKeyDown(keyCode, e);

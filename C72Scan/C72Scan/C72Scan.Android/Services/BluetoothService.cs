@@ -14,12 +14,17 @@ namespace C72Scan.Droid.Services
     // TODO consider decomposing class into BT Adapter vs Connection
     public class BluetoothService : IBluetoothService
     {
-        private readonly UUID MyUuid = UUID.FromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
+        private readonly UUID connectionId = UUID.FromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
 
         private BluetoothSocket socket;
 
         public IEnumerable<BondedDevice> GetBondedDevices()
         {
+            if (BluetoothAdapter.DefaultAdapter == null)
+            {
+                return Enumerable.Empty<BondedDevice>();
+            }
+
             return BluetoothAdapter
                 .DefaultAdapter
                 .BondedDevices
@@ -37,7 +42,7 @@ namespace C72Scan.Droid.Services
 
             BluetoothDevice remoteDevice = BluetoothAdapter.DefaultAdapter.GetRemoteDevice(device.Address);
 
-            socket = remoteDevice.CreateInsecureRfcommSocketToServiceRecord(MyUuid);
+            socket = remoteDevice.CreateInsecureRfcommSocketToServiceRecord(connectionId);
 
             socket.Connect();
         }

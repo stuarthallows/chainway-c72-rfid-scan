@@ -23,6 +23,8 @@ namespace C72Scan.ViewModels
             {
                 Scan();
             });
+
+            IsTransferToggled = true;
         }
 
         private void Scan()
@@ -37,7 +39,11 @@ namespace C72Scan.ViewModels
             }
 
             SetTag(rfidService.ConvertUiiToEpc(uii));
-            bluetoothService.Write(uii);
+
+            if (IsTransferToggled)
+            {
+                bluetoothService.Write(uii);
+            }
         }
 
         private string tag = string.Empty;
@@ -48,7 +54,6 @@ namespace C72Scan.ViewModels
         }
 
         private DateTime? scannedAt;
-
         public DateTime? ScannedAt
         {
             get => scannedAt;
@@ -61,6 +66,13 @@ namespace C72Scan.ViewModels
         {
             Tag = tagId;
             ScannedAt = DateTime.Now;
+        }
+
+        private bool isTransferToggled;
+        public bool IsTransferToggled
+        {
+            get => isTransferToggled;
+            set => SetProperty(ref isTransferToggled, value);
         }
     }
 }
