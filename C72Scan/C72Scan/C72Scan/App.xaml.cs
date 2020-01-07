@@ -6,6 +6,7 @@ namespace C72Scan
     public partial class App : Application
     {
         private readonly IRfidService rfidService;
+        private IBluetoothService bluetoothService;
 
         public App()
         {
@@ -15,6 +16,7 @@ namespace C72Scan
             MainPage = new AppShell();
 
             rfidService = DependencyService.Get<IRfidService>();
+            bluetoothService = DependencyService.Get<IBluetoothService>();
         }
 
         protected override void OnStart()
@@ -27,11 +29,14 @@ namespace C72Scan
         protected override void OnSleep()
         {
             rfidService.StopInventory();
+            bluetoothService.Close();
         }
 
         protected override void OnResume()
         {
             InitializeReader();
+
+            // TODO consider reconnecting to last connected device
         }
 
         // TODO Handle initialization failure

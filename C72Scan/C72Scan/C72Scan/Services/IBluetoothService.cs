@@ -8,5 +8,9 @@ namespace C72Scan.Services
         IEnumerable<BondedDevice> GetBondedDevices();
 
         void Connect(BondedDevice device);
+
+        void Write(string message);
+
+        void Close();
     }
 }

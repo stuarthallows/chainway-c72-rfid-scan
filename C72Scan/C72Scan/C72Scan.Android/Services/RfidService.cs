@@ -18,6 +18,9 @@ namespace C72Scan.Droid.Services
         }
 #endif
 
+        /// <summary>
+        /// Stop circular identification
+        /// </summary>
         public bool StopInventory()
         {
 #if NO_BLUETOOTH
@@ -27,6 +30,9 @@ namespace C72Scan.Droid.Services
 #endif
         }
 
+        /// <summary>
+        /// Initialize UHF module.
+        /// </summary>
         public bool Init()
         {
 #if NO_BLUETOOTH
@@ -36,6 +42,9 @@ namespace C72Scan.Droid.Services
 #endif
         }
 
+        /// <summary>
+        /// Switch off UHF module
+        /// </summary>
         public bool Free()
         {
 #if NO_BLUETOOTH
@@ -45,6 +54,12 @@ namespace C72Scan.Droid.Services
 #endif
         }
 
+        /// <summary>
+        /// This formula identify tag in single step, return UII for only one time.
+        /// </summary>
+        /// <remarks>
+        /// Consider calling inventorySingleTagEPC_TID_USER to get TID directly.
+        /// </remarks>
         public string InventorySingleTag()
         {
 #if NO_BLUETOOTH
@@ -54,6 +69,9 @@ namespace C72Scan.Droid.Services
 #endif
         }
 
+        /// <summary>
+        /// UII transform to EPC.
+        /// </summary>
         public string ConvertUiiToEpc(string uii)
         {
 #if NO_BLUETOOTH

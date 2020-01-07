@@ -1,14 +1,6 @@
-﻿using System;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
 using C72Scan.Models;
-using C72Scan.Views;
 using C72Scan.ViewModels;
 
 namespace C72Scan.Views

@@ -8,10 +8,12 @@ namespace C72Scan.ViewModels
     public class ScanViewModel : BaseViewModel
     {
         private readonly IRfidService rfidService;
+        private IBluetoothService bluetoothService;
 
         public ScanViewModel()
         {
             rfidService = DependencyService.Get<IRfidService>();
+            bluetoothService = DependencyService.Get<IBluetoothService>();
 
             Title = "Scan";
 
@@ -35,6 +37,7 @@ namespace C72Scan.ViewModels
             }
 
             SetTag(rfidService.ConvertUiiToEpc(uii));
+            bluetoothService.Write(uii);
         }
 
         private string tag = string.Empty;
@@ -45,6 +48,7 @@ namespace C72Scan.ViewModels
         }
 
         private DateTime? scannedAt;
+
         public DateTime? ScannedAt
         {
             get => scannedAt;
