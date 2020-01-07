@@ -8,7 +8,7 @@ namespace C72Scan.Droid.Services
 {
     public class RfidService : IRfidService
     {
-#if NO_BLUETOOTH
+#if NO_RFID
 #else
         private RFIDWithUHF uhfAPI;
 
@@ -23,7 +23,7 @@ namespace C72Scan.Droid.Services
         /// </summary>
         public bool StopInventory()
         {
-#if NO_BLUETOOTH
+#if NO_RFID
             return true;
 #else
             return uhfAPI.StopInventory();
@@ -35,7 +35,7 @@ namespace C72Scan.Droid.Services
         /// </summary>
         public bool Init()
         {
-#if NO_BLUETOOTH
+#if NO_RFID
             return true;
 #else
             return uhfAPI.Init();
@@ -47,7 +47,7 @@ namespace C72Scan.Droid.Services
         /// </summary>
         public bool Free()
         {
-#if NO_BLUETOOTH
+#if NO_RFID
             return true;
 #else
             return uhfAPI.Free();
@@ -62,7 +62,7 @@ namespace C72Scan.Droid.Services
         /// </remarks>
         public string InventorySingleTag()
         {
-#if NO_BLUETOOTH
+#if NO_RFID
             return "X9999ASDFZZZZZ";
 #else
             return uhfAPI.InventorySingleTag();
@@ -74,7 +74,7 @@ namespace C72Scan.Droid.Services
         /// </summary>
         public string ConvertUiiToEpc(string uii)
         {
-#if NO_BLUETOOTH
+#if NO_RFID
             return "X9999ASDFZZZZZ9999";
 #else
             return uhfAPI.ConvertUiiToEPC(uii);
