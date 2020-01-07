@@ -29,8 +29,6 @@ namespace C72Scan.ViewModels
             {
                 Scan();
             });
-
-            IsTransferToggled = true;
         }
 
         private void Scan()
@@ -92,7 +90,7 @@ namespace C72Scan.ViewModels
             ScannedAt = DateTime.Now;
         }
 
-        private bool isTransferToggled;
+        private bool isTransferToggled = true;
         public bool IsTransferToggled
         {
             get => isTransferToggled;
