@@ -10,6 +10,8 @@ namespace C72Scan.Views
     [DesignTimeVisible(false)]
     public partial class AboutPage : ContentPage
     {
+        // TODO use AppInfo to get version number.
+
         public AboutPage()
         {
             InitializeComponent();

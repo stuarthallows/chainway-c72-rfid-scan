@@ -69,6 +69,7 @@ namespace C72Scan.ViewModels
             }
         }
 
+        // TODO pass device address as command parameter
         private void ExecuteConnectToDeviceCommand()
         {
             try

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Windows.Input;
 using C72Scan.Services;
+using Plugin.SimpleAudioPlayer;
 using Xamarin.Forms;
 
 namespace C72Scan.ViewModels
@@ -10,6 +13,8 @@ namespace C72Scan.ViewModels
         private readonly IRfidService rfidService;
         private IBluetoothService bluetoothService;
 
+        public ICommand PlaySoundCommand { get; set; }
+
         public ScanViewModel()
         {
             rfidService = DependencyService.Get<IRfidService>();
@@ -18,6 +23,7 @@ namespace C72Scan.ViewModels
             Title = "Scan";
 
             ScanCommand = new Command(Scan);
+            PlaySoundCommand = new Command(PlaySound);
 
             MessagingCenter.Subscribe<string, string>(this, "Scan", (sender, arg) =>
             {
@@ -43,6 +49,24 @@ namespace C72Scan.ViewModels
             if (IsTransferToggled)
             {
                 bluetoothService.Write(uii);
+            }
+
+            PlaySound();
+        }
+
+        private void PlaySound()
+        {
+            try
+            {
+                // TODO move into service
+                // TODO add a setting to toggle sound
+                var audioStream = GetStreamFromFile("Audio.beep.mp3");
+                CrossSimpleAudioPlayer.Current.Load(audioStream);
+                CrossSimpleAudioPlayer.Current.Play();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
         }
 
@@ -73,6 +97,15 @@ namespace C72Scan.ViewModels
         {
             get => isTransferToggled;
             set => SetProperty(ref isTransferToggled, value);
+        }
+
+        private Stream GetStreamFromFile(string filename)
+        {
+            var assembly = typeof(App).GetTypeInfo().Assembly;
+
+            var resourceName = $"{assembly.GetName().Name}.{filename}";
+
+            return assembly.GetManifestResourceStream(resourceName);
         }
     }
 }

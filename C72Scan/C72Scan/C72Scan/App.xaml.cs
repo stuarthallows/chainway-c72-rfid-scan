@@ -3,6 +3,9 @@ using C72Scan.Services;
 
 namespace C72Scan
 {
+    /// <summary>
+    /// TODO save preferences: https://docs.microsoft.com/en-us/xamarin/essentials/preferences?context=xamarin%2Fxamarin-forms&tabs=android
+    /// </summary>
     public partial class App : Application
     {
         private readonly IRfidService rfidService;
